@@ -1,3 +1,5 @@
+import React from "react";
+import { motion, useScroll, useTransform } from "framer-motion";
 import Link from "next/link";
 
 const socialIcons = [
@@ -34,8 +36,24 @@ const socialIcons = [
 ];
 
 const Navbar = () => {
+  const { scrollY } = useScroll();
+  const background = useTransform(
+    scrollY,
+    [0, 100],
+    [
+      "linear-gradient(30deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.0) 100%)",
+      "linear-gradient(50deg, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0.1) 10%)",
+    ]
+  );
+  const height = useTransform(scrollY, [0, 100], [80, 60]);
+
   return (
-    <nav className="flex justify-between items-center text-white p-4">
+    <motion.nav
+      className="fixed top-0 left-0 w-full z-50 flex justify-between items-center text-white px-4"
+      style={{
+        background,
+        height,
+      }}>
       {/* Left: Menu */}
       <div className="flex space-x-4">
         <Link href="/store" className="hover:text-gray-300">
@@ -66,7 +84,7 @@ const Navbar = () => {
           </a>
         ))}
       </div>
-    </nav>
+    </motion.nav>
   );
 };
 

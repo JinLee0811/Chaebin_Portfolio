@@ -88,8 +88,8 @@ const VideoCarousel: React.FC = () => {
             <Image
               src={videos[currentIndex].thumbnail}
               alt={videos[currentIndex].title}
-              layout="fill"
-              objectFit="cover"
+              fill
+              style={{ objectFit: "cover" }}
               className="rounded-3xl"
             />
             <div className="absolute inset-0 bg-black rounded-3xl bg-opacity-40 flex items-center justify-center hover:opacity-50 transition-opacity duration-300">
@@ -102,9 +102,9 @@ const VideoCarousel: React.FC = () => {
                   height="24px">
                   <path
                     fill="#000000"
-                    fill-rule="evenodd"
+                    fillRule="evenodd"
                     d="M3.242 2.322a.5.5 0 0 1 .491-.014l9 4.75a.5.5 0 0 1 0 .884l-9 4.75A.5.5 0 0 1 3 12.25v-9.5a.5.5 0 0 1 .242-.428M4 3.579v7.842L11.429 7.5z"
-                    clip-rule="evenodd"
+                    clipRule="evenodd"
                   />
                 </svg>
               </button>

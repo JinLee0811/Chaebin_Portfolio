@@ -65,7 +65,7 @@ const Gallery = () => {
               <Image
                 src={item.src}
                 alt={item.alt}
-                layout="fill"
+                fill
                 className="absolute inset-0 h-full w-full object-cover object-center transition duration-200 group-hover:scale-110"
               />
 
