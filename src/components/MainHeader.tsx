@@ -11,7 +11,7 @@ const MainHeader = () => {
       </div>
 
       {/* Background Image */}
-      <div className="absolute inset-0 z-10">
+      <div className="absolute inset-0 z-20">
         <Image
           src={chaebin_main}
           alt="Background Image"
@@ -19,20 +19,21 @@ const MainHeader = () => {
           className="object-cover object-[50%_37%]"
           priority
         />
-        <div className="absolute inset-0 bg-black opacity-50"></div>
+        <div className="absolute inset-0 bg-black opacity-20"></div>
       </div>
 
       {/* Content */}
       <div className="relative z-20 flex flex-col justify-center items-center h-full text-center">
-        <h1 className="text-3xl font-bold leading-tight mb-4">안녕하세요 채빈입니다.</h1>
-        <p className="text-lg text-gray-300 mb-8">
-          Discover amazing features and services that await you.
+        <h1 className="text-3xl font-bold leading-tight mb-4">
+          안녕하세요! 싱어송라이터 가수 채빈입니다.
+        </h1>
+        <p className="text-xl text-gray-300 mb-2">
+          Hi! I&apos;m Chaebin, a singer-songwriter from South Korea.
         </p>
-        <a
-          href="#"
-          className="bg-yellow-400 text-gray-900 hover:bg-yellow-300 py-2 px-6 rounded-full text-lg font-semibold transition duration-300 ease-in-out transform hover:scale-105 hover:shadow-lg">
-          Get Started
-        </a>
+        <p className="text-xl text-gray-300 mb-2">
+          こんにちは！韓国のシンガーソングライター、チェビンです。
+        </p>
+        <p className="text-xl text-gray-300 mb-2">你好！我是来自韩国的创作型歌手，Chaebin。</p>
       </div>
     </div>
   );

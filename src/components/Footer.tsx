@@ -1,6 +1,4 @@
 import React from "react";
-import Image from "next/image";
-import globe from "../../public/globe.svg";
 
 const footerLinks = ["About", "Features", "Blog", "Resources", "Partners", "Help", "Terms"];
 
@@ -45,15 +43,10 @@ const socialIcons = [
 
 const Footer = () => {
   return (
-    <footer className="flex min-h-screen flex-col justify-end bg-black">
+    <footer className="flex min-h-10 flex-col justify-end bg-black">
       <div className="w-full">
         <div className="container mx-auto flex flex-col">
-          <div className="my-20 flex w-full flex-col items-center">
-            {/* Logo */}
-            <div className="mb-10 shrink-0">
-              <Image className="h-9" src={globe} alt="Logo" width={100} height={36} />
-            </div>
-
+          <div className="my-6 flex w-full flex-col items-center">
             {/* Navigation Links */}
             <div className="mb-6 flex flex-col items-center gap-6 text-white">
               <div className="flex flex-wrap items-center justify-center gap-5 gap-y-3 lg:flex-nowrap lg:gap-12">

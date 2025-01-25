@@ -7,21 +7,27 @@ import Image from "next/image";
 const videos = [
   {
     id: "video1",
-    title: "The Boy is Mine",
-    thumbnail: "https://img.youtube.com/vi/QW0i1U4u0KE/maxresdefault.jpg",
-    videoId: "QW0i1U4u0KE",
+    title: "2024 Chaebin Live Stage in Vietnam", // 제목을 원하는대로 수정하세요
+    thumbnail: "https://img.youtube.com/vi/RJ6cM0VkU9I/maxresdefault.jpg",
+    videoId: "RJ6cM0VkU9I",
   },
   {
     id: "video2",
-    title: "Positions",
-    thumbnail: "https://img.youtube.com/vi/tQ0yjYUFKAE/maxresdefault.jpg",
-    videoId: "tQ0yjYUFKAE",
+    title: "추운 겨울에는 시티팝이지🎅🏻🎄 박혜경 - Loving U ✱chaebin cover✱", // 제목을 원하는대로 수정하세요
+    thumbnail: "https://img.youtube.com/vi/xy8rTXRBOEg/maxresdefault.jpg",
+    videoId: "xy8rTXRBOEg",
   },
   {
     id: "video3",
-    title: "Thank U, Next",
-    thumbnail: "https://img.youtube.com/vi/gl1aHhXnN1k/maxresdefault.jpg",
-    videoId: "gl1aHhXnN1k",
+    title: "정국(Jung Kuk) - 3D(feat. Jack Harlow) ✱chaebin cover✱", // 제목을 원하는대로 수정하세요
+    thumbnail: "https://img.youtube.com/vi/lpq_Sp0yTN8/maxresdefault.jpg",
+    videoId: "lpq_Sp0yTN8",
+  },
+  {
+    id: "video4",
+    title: "[MV] 이채빈(Chaebin) - Would U :우주", // 제목을 원하는대로 수정하세요
+    thumbnail: "https://img.youtube.com/vi/KzpHhjRR_zs/maxresdefault.jpg",
+    videoId: "KzpHhjRR_zs",
   },
 ];
 
@@ -49,14 +55,19 @@ const VideoCarousel: React.FC = () => {
   };
 
   return (
-    <div className="relative w-full py-24 bg-gray-600">
-      <h2 className="text-5xl font-bold text-white mb-6 text-center">Videos</h2>
-
+    <div className="relative w-full py-24">
+      <div className="flex justify-center items-center gap-12 mb-8">
+        <h2 className="text-2xl font-bold text-gray-800 lg:text-3xl dark:text-white">Videos</h2>
+        <p className="hidden max-w-screen-sm text-gray-500 dark:text-gray-300 md:block">
+          These are my latest YouTube videos and song cover performances. For more videos, please
+          visit my YouTube channel.
+        </p>
+      </div>
       {/* Carousel */}
       <div className="relative flex items-center justify-center">
         {/* Previous Button */}
         <button
-          className="absolute left-52 bg-white p-2 rounded-full shadow-lg hover:bg-gray-300"
+          className="absolute left-4 md:left-8 lg:left-12 bg-white p-2 rounded-full shadow-lg hover:bg-gray-300 z-10 transition-transform duration-300 hover:scale-110"
           onClick={handlePrev}>
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -70,44 +81,43 @@ const VideoCarousel: React.FC = () => {
         </button>
 
         {/* Video Thumbnail */}
-        <div className="w-[800px] h-max rounded-3xl overflow-hidden flex-shrink-0">
+        <div className="w-full max-w-[90%] md:max-w-[70%] lg:max-w-[70%] h-auto rounded-3xl overflow-hidden flex-shrink-0 ">
           <div
-            className="relative w-full h-full cursor-pointer"
+            className="relative w-full h-0 pb-[56.25%] cursor-pointer border-2 border-white dark:border-white rounded-3xl"
             onClick={() => handleVideoClick(videos[currentIndex].videoId)}>
-            <div className="relative w-full h-0 pb-[56.25%]">
-              {" "}
-              {/* 16:9 비율 유지 */}
-              <Image
-                src={videos[currentIndex].thumbnail}
-                alt={videos[currentIndex].title}
-                layout="fill"
-                objectFit="cover"
-              />
-            </div>
-
-            <div className="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center">
+            <Image
+              src={videos[currentIndex].thumbnail}
+              alt={videos[currentIndex].title}
+              layout="fill"
+              objectFit="cover"
+              className="rounded-3xl"
+            />
+            <div className="absolute inset-0 bg-black rounded-3xl bg-opacity-40 flex items-center justify-center hover:opacity-50 transition-opacity duration-300">
               <button className="bg-white p-4 rounded-full shadow-lg">
                 <svg
+                  role="img"
                   xmlns="http://www.w3.org/2000/svg"
-                  className="h-8 w-8 text-black"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                  strokeWidth={2}>
+                  viewBox="0 0 15 15"
+                  width="24px"
+                  height="24px">
                   <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M14.752 11.168l-4.586-2.753A1 1 0 009 9.21v5.578a1 1 0 001.166.986l4.586-1.372a1 1 0 00.666-.934v-2.492a1 1 0 00-.666-.934z"
+                    fill="#000000"
+                    fill-rule="evenodd"
+                    d="M3.242 2.322a.5.5 0 0 1 .491-.014l9 4.75a.5.5 0 0 1 0 .884l-9 4.75A.5.5 0 0 1 3 12.25v-9.5a.5.5 0 0 1 .242-.428M4 3.579v7.842L11.429 7.5z"
+                    clip-rule="evenodd"
                   />
                 </svg>
               </button>
             </div>
           </div>
+          <p className="mt-4 text-lg font-semibold text-center text-gray-700 dark:text-gray-300">
+            {videos[currentIndex].title}
+          </p>
         </div>
 
         {/* Next Button */}
         <button
-          className="absolute right-52 bg-white p-2 rounded-full shadow-lg hover:bg-gray-300"
+          className="absolute right-4 md:right-8 lg:right-12 bg-white p-2 rounded-full shadow-lg hover:bg-gray-300 z-10 transition-transform duration-300 hover:scale-110"
           onClick={handleNext}>
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -123,10 +133,10 @@ const VideoCarousel: React.FC = () => {
 
       {/* Modal */}
       {isModalOpen && currentVideoId && (
-        <div className="fixed w-full h-full inset-0 bg-black bg-opacity-75 flex items-center justify-center z-60">
+        <div className="fixed w-full h-full inset-0 bg-black bg-opacity-95 flex items-center justify-center z-60">
           {/* Close Button */}
           <button
-            className="absolute top-4 right-4 text-black text-2xl bg-white p-5 rounded-full"
+            className="absolute top-4 right-4 md:top-8 md:right-8 text-gray-800 text-xl bg-white px-3 py-2 rounded shadow-lg z-20"
             onClick={closeModal}>
             &times;
           </button>
