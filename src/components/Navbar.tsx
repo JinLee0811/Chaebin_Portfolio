@@ -42,25 +42,25 @@ const Navbar = () => {
     [0, 100],
     [
       "linear-gradient(30deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.0) 100%)",
-      "linear-gradient(50deg, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0.1) 10%)",
+      "linear-gradient(50deg, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.7) 10%)",
     ]
   );
   const height = useTransform(scrollY, [0, 100], [80, 60]);
 
   return (
     <motion.nav
-      className="fixed top-0 left-0 w-full z-50 flex justify-between items-center text-white px-4"
+      className="font-notcourier fixed top-0 left-0 w-full z-50 flex justify-between items-center text-white px-4"
       style={{
         background,
         height,
       }}>
       {/* Left: Menu */}
-      <div className="flex space-x-4">
-        <Link href="/store" className="hover:text-gray-300">
-          Store
+      <div className="flex space-x-4 font-bold ">
+        <Link href="/" className="hover:text-gray-600">
+          Music
         </Link>
-        <Link href="/subscribe" className="hover:text-gray-300">
-          Subscribe
+        <Link href="/chaebin-gallery" className="hover:text-gray-600">
+          Photo
         </Link>
       </div>
 

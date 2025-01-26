@@ -1,6 +1,7 @@
 import React from "react";
 import Image from "next/image";
 import chaebin_main from "../../public/chaebin_main.webp";
+import Link from "next/link";
 
 const galleryData = [
   {
@@ -35,7 +36,7 @@ const galleryData = [
 
 const Gallery = () => {
   return (
-    <div className="bg-white dark:bg-gray-800 h-full py-6 sm:py-8 lg:py-12 mx-7 mt-7 sm:mx-8 sm:mt-8 lg:mx-12 lg:mt-12">
+    <div className="bg-white font-notcourier dark:bg-gray-800 h-full py-6 sm:py-8 lg:py-12 mx-7 mt-7 sm:mx-8 sm:mt-8 lg:mx-12 lg:mt-12">
       <div className="mx-auto max-w-screen-2xl px-4 md:px-8">
         <div className="mb-4 flex items-center justify-between gap-8 sm:mb-8 md:mb-12">
           <div className="flex items-center gap-12">
@@ -49,11 +50,11 @@ const Gallery = () => {
             </p>
           </div>
 
-          <a
-            href="#"
+          <Link
+            href="/chaebin-gallery"
             className="inline-block rounded-lg border bg-white dark:bg-gray-700 dark:border-none px-4 py-2 text-center text-sm font-semibold text-gray-500 dark:text-gray-200 outline-none ring-indigo-300 transition duration-100 hover:bg-gray-100 focus-visible:ring active:bg-gray-200 md:px-8 md:py-3 md:text-base">
             More
-          </a>
+          </Link>
         </div>
 
         <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 md:gap-6 xl:gap-8">

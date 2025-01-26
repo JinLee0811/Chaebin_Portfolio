@@ -13,6 +13,11 @@ export default {
         background: "var(--background)",
         foreground: "var(--foreground)",
       },
+      fontFamily: {
+        cute: ['"Cute Font"', "cursive"], // Google Fonts: Cute Font
+        poppins: ['"Poppins"', "sans-serif"], // Google Fonts: Poppins
+        notcourier: ['"NotCourierSans"', "monospace"],
+      },
     },
   },
   plugins: [],

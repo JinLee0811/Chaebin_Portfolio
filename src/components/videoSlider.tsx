@@ -3,29 +3,30 @@
 import React, { useState } from "react";
 import YouTube from "react-youtube";
 import Image from "next/image";
+import { motion } from "framer-motion"; // Framer Motion import
 
 const videos = [
   {
     id: "video1",
-    title: "2024 Chaebin Live Stage in Vietnam", // 제목을 원하는대로 수정하세요
+    title: "2024 Chaebin Live Stage in Vietnam",
     thumbnail: "https://img.youtube.com/vi/RJ6cM0VkU9I/maxresdefault.jpg",
     videoId: "RJ6cM0VkU9I",
   },
   {
     id: "video2",
-    title: "추운 겨울에는 시티팝이지🎅🏻🎄 박혜경 - Loving U ✱chaebin cover✱", // 제목을 원하는대로 수정하세요
+    title: "추운 겨울에는 시티팝이지🎅🏻🎄 박혜경 - Loving U ✱chaebin cover✱",
     thumbnail: "https://img.youtube.com/vi/xy8rTXRBOEg/maxresdefault.jpg",
     videoId: "xy8rTXRBOEg",
   },
   {
     id: "video3",
-    title: "정국(Jung Kuk) - 3D(feat. Jack Harlow) ✱chaebin cover✱", // 제목을 원하는대로 수정하세요
+    title: "정국(Jung Kuk) - 3D(feat. Jack Harlow) ✱chaebin cover✱",
     thumbnail: "https://img.youtube.com/vi/lpq_Sp0yTN8/maxresdefault.jpg",
     videoId: "lpq_Sp0yTN8",
   },
   {
     id: "video4",
-    title: "[MV] 이채빈(Chaebin) - Would U :우주", // 제목을 원하는대로 수정하세요
+    title: "[MV] 이채빈(Chaebin) - Would U :우주",
     thumbnail: "https://img.youtube.com/vi/KzpHhjRR_zs/maxresdefault.jpg",
     videoId: "KzpHhjRR_zs",
   },
@@ -55,7 +56,7 @@ const VideoCarousel: React.FC = () => {
   };
 
   return (
-    <div className="relative w-full py-24">
+    <div className="relative w-full py-24 font-notcourier">
       <div className="flex justify-center items-center gap-12 mb-8">
         <h2 className="text-2xl font-bold text-gray-800 lg:text-3xl dark:text-white">Videos</h2>
         <p className="hidden max-w-screen-sm text-gray-500 dark:text-gray-300 md:block">
@@ -63,8 +64,9 @@ const VideoCarousel: React.FC = () => {
           visit my YouTube channel.
         </p>
       </div>
+
       {/* Carousel */}
-      <div className="relative flex items-center justify-center">
+      <div className="relative flex items-center justify-center overflow-hidden">
         {/* Previous Button */}
         <button
           className="absolute left-4 md:left-8 lg:left-12 bg-white p-2 rounded-full shadow-lg hover:bg-gray-300 z-10 transition-transform duration-300 hover:scale-110"
@@ -80,8 +82,15 @@ const VideoCarousel: React.FC = () => {
           </svg>
         </button>
 
-        {/* Video Thumbnail */}
-        <div className="w-full max-w-[90%] md:max-w-[70%] lg:max-w-[70%] h-auto rounded-3xl overflow-hidden flex-shrink-0 ">
+        {/* Video Thumbnail with Motion */}
+        <motion.div
+          key={currentIndex}
+          className="w-full max-w-[90%] md:max-w-[70%] lg:max-w-[70%] h-auto rounded-3xl overflow-hidden flex-shrink-0"
+          initial={{ opacity: 0, x: 20 }} // 슬라이드 + 페이드 효과
+          animate={{ opacity: 1, x: 0 }}
+          exit={{ opacity: 0, x: -10 }}
+          transition={{ duration: 0.8, ease: "easeInOut" }} // 부드러운 곡선 모션
+        >
           <div
             className="relative w-full h-0 pb-[56.25%] cursor-pointer border-2 border-white dark:border-white rounded-3xl"
             onClick={() => handleVideoClick(videos[currentIndex].videoId)}>
@@ -89,6 +98,7 @@ const VideoCarousel: React.FC = () => {
               src={videos[currentIndex].thumbnail}
               alt={videos[currentIndex].title}
               fill
+              priority // 빠른 로딩 우선순위 설정
               style={{ objectFit: "cover" }}
               className="rounded-3xl"
             />
@@ -113,7 +123,7 @@ const VideoCarousel: React.FC = () => {
           <p className="mt-4 text-lg font-semibold text-center text-gray-700 dark:text-gray-300">
             {videos[currentIndex].title}
           </p>
-        </div>
+        </motion.div>
 
         {/* Next Button */}
         <button

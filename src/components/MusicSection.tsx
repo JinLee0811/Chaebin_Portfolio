@@ -31,7 +31,7 @@ const MusicComponent: React.FC = () => {
   const [showMoreAlbums, setShowMoreAlbums] = useState(false);
 
   return (
-    <div className="text-white px-8 py-12">
+    <div className="text-white px-8 py-12 font-notcourier">
       {/* 노래 섹션 */}
       <div className="mb-12 p-10 rounded-3xl">
         <div className="flex justify-between items-center mb-4">
@@ -60,7 +60,7 @@ const MusicComponent: React.FC = () => {
                   <p className="text-xs text-gray-400">{song.artist}</p>
                 </div>
               </div>
-              <button className="text-gray-400 hover:text-white">···</button>
+              <button className="text-gray-300 font-cute hover:text-white">···</button>
             </div>
           ))}
         </div>
@@ -78,7 +78,7 @@ const MusicComponent: React.FC = () => {
         </div>
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-2 px-10">
           {(showMoreAlbums ? albums : albums.slice(0, 5)).map((album) => (
-            <div key={album.id} className="flex flex-col items-center mb-4">
+            <div key={album.id} className="flex flex-col items-center mb-5">
               <Image
                 src={album.thumbnail}
                 alt={album.title}
