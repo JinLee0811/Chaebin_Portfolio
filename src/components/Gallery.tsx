@@ -1,33 +1,36 @@
 import React from "react";
 import Image from "next/image";
-import chaebin_main from "../../public/chaebin_main.webp";
 import Link from "next/link";
+import image1 from "../../public/photo/image1.jpeg";
+import image4 from "../../public/photo/image4.jpeg";
+import image8 from "../../public/photo/image8.jpeg";
+import image7 from "../../public/photo/image7.jpeg";
 
 const galleryData = [
   {
     id: 1,
-    src: chaebin_main,
+    src: image8,
     alt: "Photo by Minh Pham",
     label: "VR",
     span: false,
   },
   {
     id: 2,
-    src: chaebin_main,
+    src: image4,
     alt: "Photo by Magicle",
     label: "Tech",
     span: true,
   },
   {
     id: 3,
-    src: chaebin_main,
+    src: image1,
     alt: "Photo by Martin Sanchez",
     label: "Dev",
     span: true,
   },
   {
     id: 4,
-    src: chaebin_main,
+    src: image7,
     alt: "Photo by Lorenzo Herrera",
     label: "Retro",
     span: false,
@@ -59,9 +62,9 @@ const Gallery = () => {
 
         <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 md:gap-6 xl:gap-8">
           {galleryData.map((item) => (
-            <a
+            <Link
               key={item.id}
-              href="#"
+              href="/chaebin-gallery"
               className={`group relative flex h-48 items-end overflow-hidden rounded-lg bg-gray-100 shadow-lg md:h-80 ${item.span ? "md:col-span-2" : ""}`}>
               <Image
                 src={item.src}
@@ -75,7 +78,7 @@ const Gallery = () => {
               <span className="relative ml-4 mb-3 inline-block text-sm text-white md:ml-5 md:text-lg">
                 {item.label}
               </span>
-            </a>
+            </Link>
           ))}
         </div>
       </div>

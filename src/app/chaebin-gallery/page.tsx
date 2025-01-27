@@ -1,33 +1,42 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Image from "next/image";
-import chaebin_main from "../../../public/chaebin_main.webp";
-import comingsoon from "../../../public/comingsoon.webp";
 import Navbar from "@/components/Navbar";
 
-const images = [
-  chaebin_main,
-  chaebin_main,
-  chaebin_main,
-  comingsoon,
-  chaebin_main,
-  chaebin_main,
-  comingsoon,
-  chaebin_main,
-  chaebin_main,
-];
+// 이미지 리스트
+import image1 from "../../../public/photo/image1.jpeg";
+import image2 from "../../../public/photo/image2.jpeg";
+import image3 from "../../../public/photo/image3.jpeg";
+import image4 from "../../../public/photo/image4.jpeg";
+import image5 from "../../../public/photo/image5.jpeg";
+import image6 from "../../../public/photo/image6.jpeg";
+import image7 from "../../../public/photo/image7.jpeg";
+import image8 from "../../../public/photo/image8.jpeg";
+
+const images = [image1, image2, image3, image4, image5, image6, image7, image8];
 
 export default function Gallery() {
-  const [selectedImage, setSelectedImage] = useState<typeof chaebin_main | null>(null);
+  const [selectedImage, setSelectedImage] = useState<string | null>(null);
 
-  const handleImageClick = (image: typeof chaebin_main) => {
+  const handleImageClick = (image: string) => {
     setSelectedImage(image);
   };
 
   const closeModal = () => {
     setSelectedImage(null);
   };
+
+  useEffect(() => {
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        closeModal();
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, []);
 
   return (
     <>
@@ -39,128 +48,44 @@ export default function Gallery() {
           Explore my journey and achievements.
         </p>
 
-        {/* Masonry Grid */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-          {/* 첫 번째 열 */}
-          <div className="grid gap-4">
+        {/* Masonry Layout */}
+        <div className="columns-2 md:columns-3 lg:columns-4 gap-4 space-y-4">
+          {images.map((image, index) => (
             <div
-              className="cursor-pointer overflow-hidden rounded-lg"
-              onClick={() => handleImageClick(images[0])}>
+              key={index}
+              className="break-inside-avoid cursor-pointer overflow-hidden rounded-lg shadow-lg"
+              onClick={() => handleImageClick(image.src)}>
               <Image
-                src={images[0]}
-                alt="Gallery Image 1"
+                src={image}
+                alt={`Gallery Image ${index + 1}`}
                 className="object-cover hover:scale-110 transition-transform duration-300 rounded-lg"
                 width={400}
-                height={400}
+                height={300} // 동적 크기 조정
               />
             </div>
-            <div
-              className="cursor-pointer overflow-hidden rounded-lg"
-              onClick={() => handleImageClick(images[1])}>
-              <Image
-                src={images[1]}
-                alt="Gallery Image 2"
-                className="object-cover hover:scale-110 transition-transform duration-300 rounded-lg"
-                width={400}
-                height={400}
-              />
-            </div>
-          </div>
-
-          {/* 두 번째 열 */}
-          <div className="grid gap-4">
-            <div
-              className="cursor-pointer overflow-hidden rounded-lg"
-              onClick={() => handleImageClick(images[2])}>
-              <Image
-                src={images[2]}
-                alt="Gallery Image 3"
-                className="object-cover hover:scale-110 transition-transform duration-300 rounded-lg"
-                width={400}
-                height={400}
-              />
-            </div>
-            <div
-              className="cursor-pointer overflow-hidden rounded-lg"
-              onClick={() => handleImageClick(images[3])}>
-              <Image
-                src={images[3]}
-                alt="Gallery Image 4"
-                className="object-cover hover:scale-110 transition-transform duration-300 rounded-lg"
-                width={400}
-                height={400}
-              />
-            </div>
-          </div>
-
-          {/* 세 번째 열 */}
-          <div className="grid gap-4">
-            <div
-              className="cursor-pointer overflow-hidden rounded-lg"
-              onClick={() => handleImageClick(images[4])}>
-              <Image
-                src={images[4]}
-                alt="Gallery Image 5"
-                className="object-cover hover:scale-110 transition-transform duration-300 rounded-lg"
-                width={400}
-                height={400}
-              />
-            </div>
-            <div
-              className="cursor-pointer overflow-hidden rounded-lg"
-              onClick={() => handleImageClick(images[5])}>
-              <Image
-                src={images[5]}
-                alt="Gallery Image 6"
-                className="object-cover hover:scale-110 transition-transform duration-300 rounded-lg"
-                width={400}
-                height={400}
-              />
-            </div>
-          </div>
-
-          {/* 네 번째 열 */}
-          <div className="grid gap-4">
-            <div
-              className="cursor-pointer overflow-hidden rounded-lg"
-              onClick={() => handleImageClick(images[6])}>
-              <Image
-                src={images[6]}
-                alt="Gallery Image 7"
-                className="object-cover hover:scale-110 transition-transform duration-300 rounded-lg"
-                width={400}
-                height={400}
-              />
-            </div>
-            <div
-              className="cursor-pointer overflow-hidden rounded-lg"
-              onClick={() => handleImageClick(images[7])}>
-              <Image
-                src={images[7]}
-                alt="Gallery Image 8"
-                className="object-cover hover:scale-110 transition-transform duration-300 rounded-lg"
-                width={400}
-                height={400}
-              />
-            </div>
-          </div>
+          ))}
         </div>
 
         {/* Modal */}
         {selectedImage && (
           <div className="fixed inset-0 z-50 bg-black bg-opacity-75 flex items-center justify-center">
-            <div className="relative">
-              <button
-                className="absolute top-4 right-4 text-white text-2xl font-bold"
-                onClick={closeModal}>
-                &times;
-              </button>
+            <button
+              className="absolute top-10 right-10 hover:bg-gray-500 text-black text-2xl px-3 font-bold bg-white bg-opacity-50 rounded-full"
+              onClick={closeModal}>
+              &times;
+            </button>
+            <div className="relative max-w-[90vw] max-h-[90vh]">
               <Image
                 src={selectedImage}
                 alt="Selected Image"
-                width={800}
-                height={800}
                 className="object-contain rounded-lg"
+                layout="intrinsic"
+                width={800}
+                height={600}
+                style={{
+                  maxWidth: "100%",
+                  maxHeight: "calc(100vh - 80px)", // 모달의 최대 높이를 제한
+                }}
               />
             </div>
           </div>

@@ -57,10 +57,13 @@ const Navbar = () => {
       {/* Left: Menu */}
       <div className="flex space-x-4 font-bold ">
         <Link href="/" className="hover:text-gray-600">
-          Music
+          Home
         </Link>
         <Link href="/chaebin-gallery" className="hover:text-gray-600">
-          Photo
+          / Photo
+        </Link>
+        <Link href="/music" className="hover:text-gray-600">
+          / Download / Stream
         </Link>
       </div>
 
