@@ -11,7 +11,7 @@ import melon from "../../../public/melon.png";
 import vibe from "../../../public/vibe.png";
 import chaebin from "../../../public/chaebin_main.webp";
 import apple from "../../../public/apple.png";
-import spotify from "../../../public/spotify.png";
+import spotify from "../../../public/Spotify.png";
 
 const storeLinks = [
   {
