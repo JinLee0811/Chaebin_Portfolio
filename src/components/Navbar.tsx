@@ -1,6 +1,9 @@
-import React from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
+"use client";
+
+import React, { useState, useEffect } from "react";
+import { motion, useScroll, AnimatePresence, useTransform } from "framer-motion";
 import Link from "next/link";
+import { Menu, X } from "lucide-react";
 
 const socialIcons = [
   {
@@ -37,6 +40,7 @@ const socialIcons = [
 
 const Navbar = () => {
   const { scrollY } = useScroll();
+  const [menuOpen, setMenuOpen] = useState(false);
   const background = useTransform(
     scrollY,
     [0, 100],
@@ -45,49 +49,126 @@ const Navbar = () => {
       "linear-gradient(50deg, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.7) 10%)",
     ]
   );
-  const height = useTransform(scrollY, [0, 100], [80, 60]);
+
+  // 화면 크기가 커질 때 메뉴 자동 닫힘
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth >= 768) {
+        setMenuOpen(false);
+      }
+    };
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   return (
-    <motion.nav
-      className="font-notcourier fixed top-0 left-0 w-full z-50 flex justify-between items-center text-white px-4"
-      style={{
-        background,
-        height,
-      }}>
-      {/* Left: Menu */}
-      <div className="flex space-x-4 font-bold ">
-        <Link href="/" className="hover:text-gray-600">
-          Home
-        </Link>
-        <Link href="/chaebin-gallery" className="hover:text-gray-600">
-          / Photo
-        </Link>
-        <Link href="/music" className="hover:text-gray-600">
-          / Download / Stream
-        </Link>
-      </div>
+    <>
+      <motion.nav
+        className="font-notcourier fixed top-0 left-0 w-full z-50 flex justify-between items-center text-white px-4 py-3"
+        style={{ background }}>
+        {/* 모바일 메뉴 버튼 */}
+        <div className="md:hidden">
+          <button onClick={() => setMenuOpen(true)} className="text-white">
+            <Menu size={32} />
+          </button>
+        </div>
 
-      {/* Center: Logo */}
-      <Link href="/">
-        <div className="text-2xl font-bold">Chaebin</div>
-      </Link>
+        {/* Left: Menu (데스크탑) */}
+        <div className="hidden md:flex space-x-4 font-bold">
+          <Link href="/" className="hover:text-gray-600">
+            Home
+          </Link>
+          <Link href="/chaebin-gallery" className="hover:text-gray-600">
+            / Photo
+          </Link>
+          <Link href="/music" className="hover:text-gray-600">
+            / Download / Stream
+          </Link>
+        </div>
 
-      {/* Right: Social Links */}
-      <div className="flex space-x-4">
-        {socialIcons.map((icon) => (
-          <a key={icon.id} href={icon.link} target="_blank" rel="noopener noreferrer">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
-              viewBox={icon.viewBox}
-              fill="none">
-              <path fillRule="evenodd" clipRule="evenodd" d={icon.d} fill="#fefefe" />
-            </svg>
-          </a>
-        ))}
-      </div>
-    </motion.nav>
+        {/* Center: Logo */}
+        <Link href="/">
+          <div className="font-notcourier text-2xl font-bold">Chaebin</div>
+        </Link>
+
+        {/* Right: Social Links */}
+        <div className="hidden md:flex space-x-4">
+          {socialIcons.map((icon) => (
+            <a key={icon.id} href={icon.link} target="_blank" rel="noopener noreferrer">
+              <svg width="24" height="24" viewBox={icon.viewBox} fill="none">
+                <path fillRule="evenodd" clipRule="evenodd" d={icon.d} fill="#fefefe" />
+              </svg>
+            </a>
+          ))}
+        </div>
+      </motion.nav>
+
+      {/* 모바일 사이드 메뉴 */}
+      <AnimatePresence>
+        {menuOpen && (
+          <>
+            {/* 오버레이 */}
+            <motion.div
+              className="fixed inset-0 bg-black bg-opacity-50 backdrop-blur-sm z-40"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0, transition: { duration: 0.3 } }}
+              onClick={() => setMenuOpen(false)}
+            />
+
+            {/* 사이드바 메뉴 */}
+            <motion.div
+              className="fixed top-0 left-0 h-full w-80 bg-white shadow-lg z-50 flex flex-col p-6"
+              initial={{ x: "-100%" }}
+              animate={{ x: 0, transition: { type: "spring", stiffness: 300, damping: 30 } }}
+              exit={{ x: "-100%", transition: { type: "spring", stiffness: 300, damping: 30 } }}>
+              {/* 닫기 버튼 */}
+              <button
+                onClick={() => setMenuOpen(false)}
+                className="absolute top-4 right-4 text-gray-700">
+                <X size={24} />
+              </button>
+
+              {/* 로고 */}
+              <div className="font-notcourier text-xl font-bold text-black">Chaebin</div>
+
+              {/* 메뉴 리스트 */}
+              <nav className="mt-8 space-y-4 text-lg text-black font-bold font-notcourier">
+                <Link
+                  href="/"
+                  className="block hover:underline decoration-black decoration-[3px]"
+                  onClick={() => setMenuOpen(false)}>
+                  Home
+                </Link>
+                <Link
+                  href="/chaebin-gallery"
+                  className="block hover:underline decoration-black decoration-[3px]"
+                  onClick={() => setMenuOpen(false)}>
+                  Photo
+                </Link>
+                <Link
+                  href="/music"
+                  className="block hover:underline decoration-black decoration-[3px]"
+                  onClick={() => setMenuOpen(false)}>
+                  Download & Stream
+                </Link>
+              </nav>
+
+              {/* 소셜 아이콘 (모바일) */}
+              <div className="flex justify-center space-x-4 mt-14">
+                {socialIcons.map((icon) => (
+                  <a key={icon.id} href={icon.link} target="_blank" rel="noopener noreferrer">
+                    <svg width="28" height="28" viewBox={icon.viewBox} fill="none">
+                      <path fillRule="evenodd" clipRule="evenodd" d={icon.d} fill="#333" />
+                    </svg>
+                  </a>
+                ))}
+              </div>
+            </motion.div>
+          </>
+        )}
+      </AnimatePresence>
+    </>
   );
 };
 
