@@ -82,7 +82,7 @@ const Navbar = () => {
             / Photo
           </Link>
           <Link href="/music" className="hover:text-gray-600">
-            / Download / Stream
+            / Music
           </Link>
         </div>
 
